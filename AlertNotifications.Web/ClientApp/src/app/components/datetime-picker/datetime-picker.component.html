@@ -1,0 +1,42 @@
+<section fxLayout="column"
+         fxLayoutAlign="start stretch"
+         class="container">
+  <mat-form-field>
+    <input matInput
+           [matDatepicker]="picker"
+           [value]="date"
+           (dateChange)="dateChanged($event)">
+    <mat-datepicker-toggle matSuffix
+                           [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+  <section fxLayout="row | wrap"
+           fxLayoutAlign="start center">
+    <section fxLayout="row"
+             fxLayoutAlign="start center"
+             fxFlex>
+      <p>Hours</p>
+      <mat-slider fxFlex
+                  [max]="hourMax"
+                  [min]="hourMin"
+                  [step]="hourStep"
+                  [thumbLabel]="hourThumb"
+                  [tickInterval]="hourInterval"
+                  [value]="date.getHours()"
+                  (input)="setHours($event)"></mat-slider>
+    </section>
+    <section fxLayout="row"
+             fxLayoutAlign="start center"
+             fxFlex>
+      <p>Mins</p>
+      <mat-slider fxFlex
+                  [max]="minuteMax"
+                  [min]="minuteMin"
+                  [step]="minuteStep"
+                  [thumbLabel]="minuteThumb"
+                  [tickInterval]="minuteInterval"
+                  [value]="date.getMinutes()"
+                  (input)="setMinutes($event)"></mat-slider>
+    </section>
+  </section>
+</section>

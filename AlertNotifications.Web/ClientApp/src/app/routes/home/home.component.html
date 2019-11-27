@@ -1,0 +1,26 @@
+<mat-toolbar>Test DateTime Serialization</mat-toolbar>
+<datetime-picker [date]="alert.trigger"></datetime-picker>
+<section fxLayout="column"
+         fxLayoutAlign="start stretch"
+         class="container">
+  <mat-form-field>
+    <mat-label>Message</mat-label>
+    <input matInput
+           [(ngModel)]="alert.message">
+  </mat-form-field>
+</section>
+<button mat-button
+        (click)="saveAlert()">Test</button>
+<ng-container *ngIf="alerter.alerts$ | async as alerts else loading">
+  <mat-toolbar>Alerts</mat-toolbar>
+  <section *ngIf="alerts.length > 0" fxLayout="row | wrap" fxLayoutAlign="start start" class="container">
+    <section *ngFor="let a of alerts" class="background card elevated" fxLayout="column" fxLayoutAlign="start stretch" [style.width.px]="320">
+      <p class="mat-body-strong">{{a.trigger | date:'HH:mm_dd-MMM-yyyy'}}</p>
+      <p>{{a.message | truncate}}</p>
+    </section>
+  </section>
+  <p class="mat-title" *ngIf="!(alerts.length > 0)">No Alerts Available</p>
+</ng-container>
+<ng-template #loading>
+  <mat-progress-bar mode="indeterminate" color="accent"></mat-progress-bar>
+</ng-template>
